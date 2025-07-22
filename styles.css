@@ -118,8 +118,9 @@ html {
 }
 
 .tech-logo {
-    max-width: 30px;
-    max-height: 30px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 .desc-left {
     display: flex;
@@ -131,6 +132,6 @@ html {
 .tech-list {
     display: grid;
     writing-mode: horizontal-tb;
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
     gap: 10px
 }
