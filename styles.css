@@ -88,7 +88,49 @@ html {
     color:rgb(150, 150, 150);
 }
 
+.text-box {
+    white-space: pre-wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.about-desc-box {
+    list-style: none;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 80%;
+    height: 100%;
+}
 
 
 
+.about-desc-box p {
+    width: 50%;
+}
 
+.about-desc-box .photo {
+   width: 100%;
+   max-height: 100%;
+}
+
+.tech-logo {
+    max-width: 30px;
+    max-height: 30px;
+}
+.desc-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 30%;
+}
+
+.tech-list {
+    display: grid;
+    writing-mode: horizontal-tb;
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 10px
+}
