@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-WORKDIR .
+WORKDIR /
 RUN apt update
 RUN apt install -y nginx
 COPY assets/ assets/
