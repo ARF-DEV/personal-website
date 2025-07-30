@@ -22,6 +22,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Docker Meta
+        id: meta
         uses: docker/metadata-action@v5
         with:
           images: poposnek/personal-website
