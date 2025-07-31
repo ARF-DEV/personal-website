@@ -39,23 +39,42 @@ jobs:
           subject-name: index.docker.io/poposnek/personal-website
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+      # - name: Setup SSH
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     ssh-keyscan ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USERNAME }} 
+          key: ${{ secrets.SSH_KEY }}
+          # password: ${{ secrets.PASSWORD }}
+          # port: ${{ secrets.PORT }}
+          script: |
+            if [ "$GITHUB_ACTIONS" = "true" ]; then
+              echo "✅ Inside GitHub Actions runner"
+            else
+              echo "🏠 Running on SSH'd remote server"
+            fi
+            echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
+            sudo docker image pull poposnek/personal-website:main
+            sudo docker image ls
+            sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website
+            exit
 
-      - name: Deploy App
-        run: |
-          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_IP }}  
-          if [ "$GITHUB_ACTIONS" = "true" ]; then
-            echo "✅ Inside GitHub Actions runner"
-          else
-            echo "🏠 Running on SSH'd remote server"
-          fi
-          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
-          sudo docker image pull poposnek/personal-website:main
-          sudo docker image ls
-          sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website
-          exit
+      # - name: Deploy App
+      #   run: |
+      #     ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_IP }}  
+      #     if [ "$GITHUB_ACTIONS" = "true" ]; then
+      #       echo "✅ Inside GitHub Actions runner"
+      #     else
+      #       echo "🏠 Running on SSH'd remote server"
+      #     fi
+      #     echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
+      #     sudo docker image pull poposnek/personal-website:main
+      #     sudo docker image ls
+      #     sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website
+      #     exit
