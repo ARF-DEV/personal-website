@@ -62,7 +62,7 @@ jobs:
             echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
             sudo docker image pull poposnek/personal-website:main
             sudo docker image ls
-            sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website
+            sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website:main
             exit
 
       # - name: Deploy App
