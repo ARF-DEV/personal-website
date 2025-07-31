@@ -63,7 +63,7 @@ jobs:
             sudo docker image pull poposnek/personal-website:main
             sudo docker image ls
             sudo docker run -d -p 5050:5050 --name personal-website-fe poposnek/personal-website:main
-            sudo docker prune -f
+            sudo docker image prune -f
             exit
 
       # - name: Deploy App
