@@ -5,8 +5,8 @@ on:
     branches:
       - main
 jobs:
-  push-to-registry:
-    name: Push Docker image to registry
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -39,3 +39,17 @@ jobs:
           subject-name: index.docker.io/poposnek/personal-website
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+      - name: Deploy App
+        run: |
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SERVER_IP }}  
+          echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
+          sudo docker image pull poposnek/personal-website:main
+          sudo docker image ls
+          sudo docker run -d -p 5050:5050 --name personal-website-fe personal-website
+          exit
