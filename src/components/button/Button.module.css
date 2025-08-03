@@ -1,0 +1,22 @@
+/* .button {
+  background-color: #171717;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0;
+  color: white;
+  padding: 15px 32px;
+  margin: 0px 0px;
+  cursor: pointer;
+} */
+.button {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.1s ease;
+  cursor: pointer;
+}
+.button:hover {
+  color: rgb(150, 150, 150);
+}
+.boldText {
+  font-weight: bold;
+}

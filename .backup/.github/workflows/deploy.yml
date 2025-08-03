@@ -43,7 +43,7 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SSH_USERNAME }} 
+          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
             if [ "$GITHUB_ACTIONS" = "true" ]; then
