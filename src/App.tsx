@@ -3,13 +3,20 @@
 // import viteLogo from '/vite.svg'
 import "./App.css";
 import Home from "./pages/home/Home";
+import About from "./pages/about/About";
+import { BrowserRouter, Route, Routes } from "react-router";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      <Home />
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

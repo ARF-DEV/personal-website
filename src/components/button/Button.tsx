@@ -1,7 +1,18 @@
 import styles from "./Button.module.css";
 
-function Button({ text }: { text: string }) {
-  return <div className={`${styles.button} ${styles.boldText}`}>{text}</div>;
+type ButtonOnClickFunc = () => void;
+function Button({
+  text,
+  onClick = () => {},
+}: {
+  text: string;
+  onClick: ButtonOnClickFunc;
+}) {
+  return (
+    <button className={`${styles.button} ${styles.boldText}`} onClick={onClick}>
+      {text}
+    </button>
+  );
 }
 
 export default Button;
