@@ -1,0 +1,19 @@
+.body {
+  width: auto;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-bottom: 100px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.grid {
+  display: inline-grid;
+  min-width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  place-items: center;
+}

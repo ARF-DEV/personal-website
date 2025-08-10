@@ -1,0 +1,23 @@
+.title {
+  font-size: 20px;
+  padding: 0px 0px;
+  margin: 0px 0px;
+  color: white;
+  cursor: pointer;
+}
+.title:hover {
+  color: rgb(150, 150, 150);
+}
+.desc {
+  padding: 0px 0px 1px 0;
+  color: rgb(115, 115, 115);
+  font-size: 14px;
+  margin: 4px 0 0 0;
+}
+
+.listItem {
+  padding: 0px 0px;
+  margin: 10px 0px;
+  border-bottom: 1px solid rgb(115, 115, 115);
+  max-width: 80vw;
+}

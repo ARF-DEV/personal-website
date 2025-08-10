@@ -1,0 +1,48 @@
+name: Deploy app
+
+on: 
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Lowercase Repo
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
+      - name: Build Image
+        run: |
+          docker build -t personal-website .
+          docker image tag personal-website ghcr.io/${{ env.REPO }}:latest
+      - name: Login Docker
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Image
+        run: |
+          docker push ghcr.io/${{ env.REPO }}:latest
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
+            sudo docker rm -f personal-website-fe
+            sudo docker image pull ghcr.io/${{ env.REPO }}:latest
+            sudo docker run -d -p ${{ vars.PORT }}:${{ vars.PORT }} --name personal-website-fe ghcr.io/${{ env.REPO }}:latest
+            sudo docker image prune -f
+            sudo docker image ls
+            sudo docker ps
+            exit

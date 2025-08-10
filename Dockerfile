@@ -1,19 +1,9 @@
-FROM ubuntu:22.04
-WORKDIR /
-RUN apt update
-RUN apt install -y nginx
-COPY assets/ assets/
-COPY index.html index.html
-COPY about.html about.html
-COPY styles.css styles.css
-COPY deploy-nginx.conf /etc/nginx/nginx.conf
-EXPOSE 5050
+FROM node:22-alpine as builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-CMD ["nginx", "-g", "daemon off;"]
-
-
-
-
-
-
-
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
