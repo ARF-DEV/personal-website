@@ -18,9 +18,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lowercase Repo
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
       - name: Push Image
         run: |
-          docker push ghcr.io/${{ github.actor }}/personal-website:latest
+          docker push ghcr.io/${{ github.REPO }}:latest
 
 
 
