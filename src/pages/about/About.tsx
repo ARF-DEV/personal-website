@@ -14,6 +14,7 @@ import TsImage from "../../assets/ts.png"
 import ReactImage from "../../assets/react.png"
 // import PythonImage from "../../assets/python.png"
 import LoremIpsum from "react-lorem-ipsum";
+import Paragraph from "../../components/text/Text";
 
 function Home() {
   return (
@@ -37,6 +38,22 @@ function Home() {
             </div>
           </div>
           <div className="right">
+            <Paragraph>
+              I am a back-end developer with a passion to learn new things. I've
+              worked on different types of project ranging from AI to Games and
+              Back-end APIs. Due to my experience from past projects that uses a
+              low-level programming language such as C++ and other projects that
+              require a complex algorithm such as games, I am more aware of the app
+              performance in terms of speed and memory usage and able to try to
+              optimize it. In addition to my technical skills and experience.
+            </Paragraph>
+            <Paragraph>
+              I am also eager to learn new technologies and trends from different
+              computer science field such as Deep Learning, Game Development,
+              Graphics Programming and Web Development, I am committed to stay at
+              forefront of the industry and applying my knowledge in a new and
+              exciting ways.
+            </Paragraph>
             <LoremIpsum p={3} />
           </div>
         </div>
