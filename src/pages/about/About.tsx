@@ -25,7 +25,7 @@ function Home() {
         <div className={styles.container}>
           <div className="left">
             <Logo logo={ProfileImage} size={300} alt="profile" />
-            <Title title="Tech stacks" />
+            <Title title="my_tech_stack" size="1.9rem" />
             <div className={styles.grid}>
               <Logo logo={GolangImage} size={50} alt="profile" />
               <Logo logo={PythonImage} size={50} alt="profile" />

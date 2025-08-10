@@ -1,16 +1,17 @@
 .title {
-  font-size: 2.5rem;
-  /* font-weight: bold; */
+  font-weight: bold;
   padding: 0px 0px;
   margin: 0px 0px;
   color: white;
 }
+
 .desc {
   padding: 0px 0px 1px 0;
   color: rgb(180, 180, 180);
   font-size: 1rem;
   margin: 4px 0 0 0;
 }
+
 .container {
-  margin: 3vh 0vh;
+  margin: 2vh 0vh;
 }
