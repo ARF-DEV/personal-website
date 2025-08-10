@@ -23,7 +23,7 @@ jobs:
           echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
       - name: Push Image
         run: |
-          docker push ghcr.io/${{ github.REPO }}:latest
+          docker push ghcr.io/${{ env.REPO }}:latest
 
 
 
