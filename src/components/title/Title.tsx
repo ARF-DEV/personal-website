@@ -9,7 +9,6 @@ function Title({
   description?: string;
   size?: string;
 }) {
-  console.log(size)
   return (
     < div style={{ fontSize: size }
     } className={styles.container} >
