@@ -31,11 +31,11 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ SERVER_IP }}
-          username: ${{ SSH_USERNAME }}
-          key: ${{ SSH_KEY }}
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
-            echo "${{ secret.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker image pull ghcr.io/${{ env.REPO }}:latest
             docker rm -f personal-website-fe
             sudo docker run -d -p 5050:80 --name personal-website-fe poposnek/personal-website:main
