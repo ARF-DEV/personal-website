@@ -38,7 +38,8 @@ jobs:
             echo "${{ secrets.DOCKERHUB_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin 
             sudo docker rm -f personal-website-fe
             sudo docker image pull ghcr.io/${{ env.REPO }}:latest
-            sudo docker run -d -p 5050:80 --name personal-website-fe poposnek/personal-website:main
+            sudo docker run -d -p 5050:80 --name personal-website-fe ghcr.io/${{ env.REPO }}:latest
+            sudo docker image prune -f
             sudo docker image ls
             sudo docker ps
             exit
