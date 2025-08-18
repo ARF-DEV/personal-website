@@ -41,14 +41,18 @@ func (r *R2) Upload(ctx context.Context, bucketName string, key string, object i
 	// future improvement: add logic for multipart upload when needs arise
 	_, ok := object.(io.Seeker)
 	if !ok {
-		return fmt.Errorf("object needs to implement io.Seeker interface")
+		err := fmt.Errorf("object needs to implement io.Seeker interface")
+		log.Log().Err(err).Msgf("error on upload")
+		return err
 	}
+	// todo upload support image and reject other
 	_, err := r.client.PutObject(ctx, &s3.PutObjectInput{
 		Bucket: &bucketName,
 		Key:    &key,
 		Body:   object,
 	})
 	if err != nil {
+		log.Log().Err(err).Msgf("error on put object")
 		return err
 	}
 	return nil

@@ -73,4 +73,9 @@ var (
 		Status:  http.StatusInternalServerError,
 		Code:    "INTERNAL_SERVER",
 	}
+	ErrBadRequest = APIError{
+		Message: "bad request",
+		Status:  http.StatusBadRequest,
+		Code:    "BAD_REQUEST",
+	}
 )

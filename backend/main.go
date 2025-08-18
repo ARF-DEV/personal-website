@@ -22,7 +22,7 @@ func main() {
 		log.Fatal().Err(err).Msg("error on object storage init")
 	}
 
-	objectHandler := object.NewObjectHandler(storage)
+	objectHandler := object.NewObjectHandler(*cfg, storage)
 	r := routes.New(objectHandler)
 
 	fmt.Println("run on localhost:9999")
