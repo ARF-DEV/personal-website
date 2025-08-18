@@ -1,6 +1,8 @@
 package object
 
 import (
+	_ "image/jpeg"
+	_ "image/png"
 	"net/http"
 
 	"github.com/ARF-DEV/personal-website/backend/configs"

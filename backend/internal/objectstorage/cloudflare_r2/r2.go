@@ -1,8 +1,11 @@
 package cloudflare_r2
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"image"
+	"image/png"
 	"io"
 
 	"github.com/ARF-DEV/personal-website/backend/configs"
@@ -39,17 +42,29 @@ func New(cfg *configs.Config) (objectstorage.ObjectStorageFacade, error) {
 
 func (r *R2) Upload(ctx context.Context, bucketName string, key string, object io.Reader) error {
 	// future improvement: add logic for multipart upload when needs arise
+	// todo upload support image and allowed files like .pdf and reject other
+	// todo handle upload other files
 	_, ok := object.(io.Seeker)
 	if !ok {
 		err := fmt.Errorf("object needs to implement io.Seeker interface")
 		log.Log().Err(err).Msgf("error on upload")
 		return err
 	}
-	// todo upload support image and reject other
-	_, err := r.client.PutObject(ctx, &s3.PutObjectInput{
-		Bucket: &bucketName,
-		Key:    &key,
-		Body:   object,
+	img, _, err := image.Decode(object)
+	if err != nil {
+		return err
+	}
+	buf := bytes.Buffer{}
+	if err := png.Encode(&buf, img); err != nil {
+		return err
+	}
+
+	_, err = r.client.PutObject(ctx, &s3.PutObjectInput{
+		Bucket:             &bucketName,
+		Key:                &key,
+		Body:               bytes.NewReader(buf.Bytes()),
+		ContentDisposition: aws.String("inline"),
+		ContentType:        aws.String("image/jpeg"), // handle a correct extentions and content-type (currently all content type is image/jpeg even though its png etc)
 	})
 	if err != nil {
 		log.Log().Err(err).Msgf("error on put object")
