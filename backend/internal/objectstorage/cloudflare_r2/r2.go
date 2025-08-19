@@ -1,12 +1,10 @@
 package cloudflare_r2
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"image"
-	"image/png"
 	"io"
+	"net/http"
 
 	"github.com/ARF-DEV/personal-website/backend/configs"
 	"github.com/ARF-DEV/personal-website/backend/internal/objectstorage"
@@ -50,21 +48,21 @@ func (r *R2) Upload(ctx context.Context, bucketName string, key string, object i
 		log.Log().Err(err).Msgf("error on upload")
 		return err
 	}
-	img, _, err := image.Decode(object)
+
+	buf := make([]byte, 512)
+	_, err := object.Read(buf)
 	if err != nil {
 		return err
 	}
-	buf := bytes.Buffer{}
-	if err := png.Encode(&buf, img); err != nil {
-		return err
-	}
+	contentType := http.DetectContentType(buf)
+	object.(io.Seeker).Seek(0, io.SeekStart)
 
 	_, err = r.client.PutObject(ctx, &s3.PutObjectInput{
 		Bucket:             &bucketName,
 		Key:                &key,
-		Body:               bytes.NewReader(buf.Bytes()),
+		Body:               object,
 		ContentDisposition: aws.String("inline"),
-		ContentType:        aws.String("image/jpeg"), // handle a correct extentions and content-type (currently all content type is image/jpeg even though its png etc)
+		ContentType:        aws.String(contentType), // handle a correct extentions and content-type (currently all content type is image/jpeg even though its png etc)
 	})
 	if err != nil {
 		log.Log().Err(err).Msgf("error on put object")
