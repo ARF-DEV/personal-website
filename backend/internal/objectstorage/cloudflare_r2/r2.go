@@ -15,6 +15,8 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+var max_object_size_default int = 1 << 22 // 4MiB
+
 type R2 struct {
 	storageConfig aws.Config
 	client        *s3.Client
@@ -39,19 +41,21 @@ func New(cfg *configs.Config) (objectstorage.ObjectStorageFacade, error) {
 }
 
 func (r *R2) Upload(ctx context.Context, bucketName string, key string, object io.Reader) error {
-	// future improvement: add logic for multipart upload when needs arise
-	// todo upload support image and allowed files like .pdf and reject other
-	// todo handle upload other files
 	_, ok := object.(io.Seeker)
 	if !ok {
 		err := fmt.Errorf("object needs to implement io.Seeker interface")
 		log.Log().Err(err).Msgf("error on upload")
 		return err
 	}
+	if err := r.validateSize(object); err != nil {
+		log.Log().Err(err).Msgf("error on size validation")
+		return err
+	}
 
 	buf := make([]byte, 512)
 	_, err := object.Read(buf)
 	if err != nil {
+		log.Log().Err(err).Msgf("error on object read")
 		return err
 	}
 	contentType := http.DetectContentType(buf)
@@ -68,5 +72,21 @@ func (r *R2) Upload(ctx context.Context, bucketName string, key string, object i
 		log.Log().Err(err).Msgf("error on put object")
 		return err
 	}
+	return nil
+}
+
+func (r *R2) validateSize(object io.Reader) error {
+	if _, ok := object.(io.Seeker); !ok {
+		return fmt.Errorf("reader object must implement seeker interface")
+	}
+
+	buf := make([]byte, max_object_size_default)
+	n, err := object.Read(buf)
+	defer object.(io.Seeker).Seek(0, io.SeekStart)
+
+	if n == max_object_size_default && err == nil { // not EOF
+		return fmt.Errorf("object size is greater than default max size")
+	}
+
 	return nil
 }
