@@ -15,7 +15,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-var max_object_size_default int = 1 << 22 // 4MiB
+var max_object_size_default int = 1 << 21 // 2MiB
 
 type R2 struct {
 	storageConfig aws.Config
