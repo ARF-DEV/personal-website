@@ -2,21 +2,23 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import "./App.css";
-import Home from "./pages/home/Home";
-import About from "./pages/about/About";
-import { MemoryRouter, Route, Routes } from "react-router";
+import Home from "./pages/home/HomePage";
+import About from "./pages/about/AboutPage";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { BlogDetail } from "./pages/blog/BlogDetailPage";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      <MemoryRouter>
+      <BrowserRouter>
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blogs/:id" element={<BlogDetail />} />
         </Routes>
-      </MemoryRouter>
+      </BrowserRouter>
     </>
   );
 }

@@ -1,4 +1,12 @@
 #root {
-  width: 100vw;
+  display: flex;
   height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  width: 100%;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  /* padding-bottom: 100px; */
 }
