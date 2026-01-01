@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 import type { BlogDetail } from "../../types/blog";
 import Title from "../../components/title/Title";
+import Header from "../../components/header/Header";
+import { formatDate } from "../../utils/date";
+import Paragraph from "../../components/text/Text";
+
 export function BlogDetail(
 ) {
     const [blog, setBlog] = useState<BlogDetail | null>(null);
@@ -20,8 +24,11 @@ export function BlogDetail(
 
     return (
         <div className="container">
-            <Title title={blog.title} />
-            Apa dahh {blog?.slug} {blog?.title}
+            <Header></Header>
+            <Title title={blog.title} description={`Last updated: ${formatDate(blog.updated_at)}`} />
+            <Paragraph disableIndent>
+                {blog.content}
+            </Paragraph>
         </div>
     )
 }
