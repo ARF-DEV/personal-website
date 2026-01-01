@@ -2,10 +2,10 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import "./App.css";
-import Home from "./pages/home/HomePage";
-import About from "./pages/about/AboutPage";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { BlogDetail } from "./pages/blog/BlogDetailPage";
+import { BlogDetail } from "./pages/BlogDetail/BlogDetail";
 
 function App() {
   // const [count, setCount] = useState(0)
