@@ -1,14 +1,16 @@
 import styles from "./Logo.module.css";
 
+interface LogoProps {
+  logo: string;
+  alt: string;
+  size: number;
+}
+
 function Logo({
   logo,
   alt,
   size,
-}: {
-  logo: string;
-  alt: string;
-  size: number;
-}) {
+}: LogoProps) {
   return (
     <div className={styles.container}>
       <img
