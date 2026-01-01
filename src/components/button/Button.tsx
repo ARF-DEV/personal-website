@@ -1,9 +1,8 @@
 import styles from "./Button.module.css";
 
-type ButtonOnClickFunc = () => void;
 interface ButtonProps {
   text: string;
-  onClick: ButtonOnClickFunc;
+  onClick: () => void;
 }
 
 function Button({

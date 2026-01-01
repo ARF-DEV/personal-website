@@ -12,8 +12,10 @@ function Header() {
         <Logo logo={websiteLogo} alt="logo" size={80} />
       </div>
       <div className={styles.right}>
+        {/* TODO: use map[text : on click event] and loop through it, make it a props */}
         <Button text="Home" onClick={() => navigate("/")} />
         <Button text="About" onClick={() => navigate("/about")} />
+        <Button text="Create" onClick={() => navigate("/blogs")} />
       </div>
     </div>
   );
