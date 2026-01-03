@@ -21,5 +21,9 @@ textarea {
     background-color: rgb(23, 23, 23);
     resize: none;
     overflow: hidden;
+    font-family: inherit;
 }
 
+.footer {
+    height: 10px;
+}

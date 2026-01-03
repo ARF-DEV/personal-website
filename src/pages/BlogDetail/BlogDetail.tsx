@@ -84,7 +84,7 @@ function EditBlog({ currentBlog, setMode }: { currentBlog: Blog, setMode: React.
     }, [editedBlog]);
 
     return (
-        <div ref={containerRef} >
+        <div ref={containerRef} className="content-container" >
             <Input 
             initialValue={editedBlog.title} 
             updateFunc={setTitle} 
@@ -92,11 +92,15 @@ function EditBlog({ currentBlog, setMode }: { currentBlog: Blog, setMode: React.
             <Input 
             initialValue={editedBlog.content} 
             updateFunc={setContent}
+            variant="multi-line"
             />
-            <Button
-                text="Done"
-                onClick={saveBlog}
-            />
+            <div className="button-container">
+                <Button
+                    text="Done"
+                    onClick={saveBlog}
+                />
+            </div>
+            <div className="footer"></div>
         </div>
     );
 }
