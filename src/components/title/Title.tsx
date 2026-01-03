@@ -14,7 +14,7 @@ function Title({
   return (
     < div style={{ fontSize: size }
     } className={styles.container} >
-      <span className={styles.title}>{title}</span>
+      <span className="title">{title}</span>
       {description && <p className={styles.desc}>{description}</p>}
     </div >
   );

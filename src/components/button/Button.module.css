@@ -1,13 +1,4 @@
-/* .button {
-  background-color: #171717;
-  border: none;
-  font-size: 1rem;
-  border-radius: 0;
-  color: white;
-  padding: 15px 32px;
-  margin: 0px 0px;
-  cursor: pointer;
-} */
+
 .button {
   all: unset;
   color: inherit;
@@ -22,11 +13,7 @@
   font-weight: bold;
   cursor: pointer;
 }
-/* .button:active {
-  all: unset;
-  color: rgb(150, 150, 150);
-  font-weight: bold;
-} */
+
 button:focus {
   outline: none;
 }

@@ -1,6 +1,5 @@
 import Title from "../../components/title/Title";
 import ListItem from "./ListItem";
-import Header from "../../components/header/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { Blog } from "../../types/blog";
@@ -18,8 +17,7 @@ function Home() {
 
   }, []);
   return (
-    <div className="container">
-      <Header />
+    <div>
       <Title title="caffeine_addict's" description="for blog and stuff.." />
       {
         blogs.map((blog) => {

@@ -1,35 +1,51 @@
 import { useEffect, useRef, useState } from "react";
-import Header from "../../components/header/Header";
 import Button from "../../components/button/Button";
 import "./CreateBlog.css"
-import { Input } from "./Input";
+import Input from "../../components/input/Input";
 import axios from "axios";
+import type { BlogData } from "../../types/blog";
 
 export function CreateBlog() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [title, setTitle] = useState<string>("");
-    const [content, setContent] = useState<string>("");
+    const [blog, setBlog] = useState<BlogData>({
+        content: "",
+        title: "",
+    })
+    const updateTitle = (newTitle: string) => {
+        setBlog(
+            {
+                ...blog,
+                title: newTitle
+            }
+        )
+    }
+    const updateContent = (newContent: string) => {
+        setBlog(
+            {
+                ...blog,
+                content: newContent
+            }
+        )
+    }
+
     const submitBlog = () => {
         const postBlogs = async () => {
-            const response = await axios.post(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`, {
-                title: title,
-                content: content
-            })
+            const response = await axios.post(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`, blog)
             console.log(response);
         }
         postBlogs();
     };
+
     useEffect(() => {
         if (containerRef.current) {
             containerRef.current.scrollTop = containerRef.current.scrollHeight;
         }
-    }, [title, content])
+    }, [blog]);
 
     return (
-        <div ref={containerRef} className="container">
-            <Header />
-            <Input textSize={30} value={title} setValue={setTitle} />
-            <Input textSize={20} value={content} setValue={setContent} minHeight="200px" />
+        <div ref={containerRef} className="content-container">
+            <Input initialValue={blog.title} updateFunc={updateTitle}/>
+            <Input initialValue={blog.content} updateFunc={updateContent} variant="multi-line"/>
             <Button
                 text="Submit"
                 onClick={submitBlog}

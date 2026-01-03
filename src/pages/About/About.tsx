@@ -1,7 +1,6 @@
 import styles from './About.module.css';
 import Title from "../../components/title/Title";
 // import ListItem from "../../components/list-item/ListItem";
-import Header from "../../components/header/Header";
 import Logo from "../../components/logo/Logo"
 import ProfileImage from "../../assets/profile.jpeg"
 import RedisImage from "../../assets/redis.svg"
@@ -18,8 +17,7 @@ import Paragraph from "../../components/text/Text";
 
 function Home() {
   return (
-    <div className="container">
-      <Header />
+    <div>
       <Title title="caffeine_addict's" description="work in progress lol" />
       <div className={styles.aboutContainer}>
         <div>
