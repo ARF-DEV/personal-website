@@ -1,9 +1,8 @@
-textarea {
-    width: 100%;
-    font-size: inherit;
-    border-radius: 10px;
-    border-style: solid;
-    background-color: rgb(23, 23, 23);
-    resize: none;
-    overflow: hidden;
+.footer {
+    height: 10px;
+}
+.button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0 10px 0 10px;
 }

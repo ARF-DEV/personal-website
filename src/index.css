@@ -1,10 +1,14 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #171717;
 }
-
 
 *,
 *::before,
@@ -13,5 +17,6 @@
 }
 
 body {
+  height: 100vh;
   margin: 0;
 }

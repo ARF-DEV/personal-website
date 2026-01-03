@@ -5,13 +5,15 @@ interface InputProps {
     initialValue: string 
     updateFunc: (update: string) => void
     variant?: "one-line" | "multi-line"
+    placeHolder?: string
 }
 
 export default function Input(
     {
         initialValue,
         updateFunc,
-        variant = "one-line"
+        variant = "one-line",
+        placeHolder = "Input Here"
     }: InputProps
 ) {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -26,13 +28,13 @@ export default function Input(
     return (
         <>
             <div
-                className="input-container"
+                className={`input-container ${variant}`}
             >
                 <textarea
-                    className={`input ${variant}`}
+                    className="input"
                     ref={textAreaRef}
                     rows={1}
-                    placeholder="Insert Blog Title"
+                    placeholder={placeHolder}
                     value={initialValue}
                     onChange={(e) => updateFunc(e.target.value)}
                 />

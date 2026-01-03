@@ -6,7 +6,8 @@
 }
 
 .input {
-  font-size: 15px;
+  font-size: 18px;
+  min-height: 100%;
 }
 
 .one-line {
@@ -15,4 +16,5 @@
 
 .multi-line {
   min-height: auto;
+  flex-grow: 1;
 }

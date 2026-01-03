@@ -44,12 +44,15 @@ export function CreateBlog() {
 
     return (
         <div ref={containerRef} className="content-container">
-            <Input initialValue={blog.title} updateFunc={updateTitle}/>
-            <Input initialValue={blog.content} updateFunc={updateContent} variant="multi-line"/>
-            <Button
-                text="Submit"
-                onClick={submitBlog}
-            />
+            <Input initialValue={blog.title} updateFunc={updateTitle} placeHolder="Your title"/>
+            <Input initialValue={blog.content} updateFunc={updateContent} variant="multi-line" placeHolder="Write your content here"/>
+            <div className="button-container">
+                <Button
+                    text="Submit"
+                    onClick={submitBlog}
+                />
+            </div>
+            <div className="footer"></div>
         </div>
 
     )
