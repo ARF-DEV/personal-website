@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from "react"
 import "./input.css"
 
 interface InputProps {
@@ -16,14 +15,7 @@ export default function Input(
         placeHolder = "Input Here"
     }: InputProps
 ) {
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    useEffect(() => {
-        if (!textAreaRef.current) {
-            return
-        }
-        textAreaRef.current.style.height = "auto";
-        textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px";
-    }, [initialValue])
+
 
     return (
         <>
@@ -32,7 +24,6 @@ export default function Input(
             >
                 <textarea
                     className="input"
-                    ref={textAreaRef}
                     rows={1}
                     placeholder={placeHolder}
                     value={initialValue}

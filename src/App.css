@@ -17,13 +17,8 @@
 
 textarea {
     width: 100%;
-    border-style: none;
+    border-style: solid;
     background-color: rgb(23, 23, 23);
     resize: none;
-    overflow: hidden;
     font-family: inherit;
-}
-
-.footer {
-    height: 10px;
 }

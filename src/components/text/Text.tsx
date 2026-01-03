@@ -6,10 +6,10 @@ interface ParagraphProps {
     disableIndent?: boolean
 }
 
-function Paragraph({ children, disableIndent = false }: ParagraphProps) {
-    return (<p className={clsx(!disableIndent && styles.text)}>
+function Text({ children, disableIndent = false }: ParagraphProps) {
+    return (<p className={clsx(!disableIndent && styles.textIndent, styles.text )}>
         {children}
     </p>)
 }
 
-export default Paragraph;
+export default Text;

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../../components/button/Button";
-import "./CreateBlog.css"
 import Input from "../../components/input/Input";
 import axios from "axios";
 import type { BlogData } from "../../types/blog";
+import styles from "./CreateBlog.module.css"
 
 export function CreateBlog() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,7 @@ export function CreateBlog() {
         <div ref={containerRef} className="content-container">
             <Input initialValue={blog.title} updateFunc={updateTitle} placeHolder="Your title"/>
             <Input initialValue={blog.content} updateFunc={updateContent} variant="multi-line" placeHolder="Write your content here"/>
-            <div className="button-container">
+            <div className={styles.buttonContainer}>
                 <Button
                     text="Submit"
                     onClick={submitBlog}

@@ -1,6 +1,5 @@
 import styles from './About.module.css';
 import Title from "../../components/title/Title";
-// import ListItem from "../../components/list-item/ListItem";
 import Logo from "../../components/logo/Logo"
 import ProfileImage from "../../assets/profile.jpeg"
 import RedisImage from "../../assets/redis.svg"
@@ -11,7 +10,6 @@ import RabbitMQImage from "../../assets/rabbitmq.png"
 import JsImage from "../../assets/js.png"
 import TsImage from "../../assets/ts.png"
 import ReactImage from "../../assets/react.png"
-// import PythonImage from "../../assets/python.png"
 import LoremIpsum from "react-lorem-ipsum";
 import Paragraph from "../../components/text/Text";
 

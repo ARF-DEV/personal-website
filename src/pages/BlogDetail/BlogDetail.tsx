@@ -1,22 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState, type JSX } from "react";
-import { useParams } from "react-router"
-import type { Blog, BlogData } from "../../types/blog";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router"
 import Title from "../../components/title/Title";
-import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { formatDate } from "../../utils/date";
-import Paragraph from "../../components/text/Text";
-
-enum Mode {
-    View,
-    Edit
-}
+import Text from "../../components/text/Text";
+import type { Blog } from "../../types/blog";
+import styles from "./BlogDetail.module.css"
 
 export function BlogDetail() {
+    const navigate = useNavigate()
     const param = useParams();
     const [blog, setBlog] = useState<Blog | null>();
-    const [mode, setMode] = useState<Mode>(Mode.View);
 
     useEffect(() => {
         const fetchBlogDetail = async () => {
@@ -24,83 +19,26 @@ export function BlogDetail() {
             setBlog(response.data.data);
         }
         fetchBlogDetail();
-    }, [mode, param.id])
+    }, [param.id])
 
     if (!blog) return null;
 
-    const renderState: Record<Mode, JSX.Element> = {
-        [Mode.View]: (<ViewDetail blog={blog} setMode={setMode} />),
-        [Mode.Edit]: (<EditBlog currentBlog={blog} setMode={setMode} />)
-    };
-
-    return renderState[mode];
-}
-
-function ViewDetail({ blog, setMode }: { blog: Blog, setMode: React.Dispatch<Mode> }) {
     return (
         <>
             <div className="content-container">
                 <Title title={blog.title} description={`Last updated: ${formatDate(blog.updated_at)}`} />
+                <Text disableIndent>
+                    {blog.content}
+                </Text>
+            <div className={styles.buttonContainer}>
                 <Button
                     text="Edit"
-                    onClick={() => setMode(Mode.Edit)}
+                    onClick={() => {navigate(`/blogs/${param.id}/edit`)}}
                 />
-                <Paragraph disableIndent>
-                    {blog.content}
-                </Paragraph>
+            </div>
+            <div className={styles.footer}></div>
             </div>
         </>
     )
-}
 
-function EditBlog({ currentBlog, setMode }: { currentBlog: Blog, setMode: React.Dispatch<Mode> }) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [editedBlog, setEditedBlog] = useState<BlogData>({
-        title: currentBlog.title,
-        content: currentBlog.content,
-    });
-
-    const saveBlog= () => {
-        const hitPutBlogs = async () => {
-            const response = await axios.put(`${import.meta.env.VITE_API_HOST}/public/v1/blogs/${currentBlog.slug}`, editedBlog);
-            if (response.status === 200)  {
-                setMode(Mode.View);
-            }
-        }
-        hitPutBlogs();
-    };
-
-    const setTitle = (newTitle: string) => {
-        setEditedBlog((prev) => ({...prev, title: newTitle}))
-    }
-    const setContent = (newContent: string) => {
-        setEditedBlog((prev) => ({...prev, content: newContent}))
-    }
-
-    useEffect(() => {
-        if (containerRef.current) {
-            containerRef.current.scrollTop = containerRef.current.scrollHeight;
-        }
-    }, [editedBlog]);
-
-    return (
-        <div ref={containerRef} className="content-container" >
-            <Input 
-            initialValue={editedBlog.title} 
-            updateFunc={setTitle} 
-            />
-            <Input 
-            initialValue={editedBlog.content} 
-            updateFunc={setContent}
-            variant="multi-line"
-            />
-            <div className="button-container">
-                <Button
-                    text="Done"
-                    onClick={saveBlog}
-                />
-            </div>
-            <div className="footer"></div>
-        </div>
-    );
 }
