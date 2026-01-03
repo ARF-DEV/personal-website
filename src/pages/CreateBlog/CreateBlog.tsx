@@ -30,6 +30,10 @@ export function CreateBlog() {
 
     const submitBlog = () => {
         const postBlogs = async () => {
+            if (blog.title === "")  {
+                alert("title is required")
+                return
+            }
             const response = await axios.post(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`, blog)
             console.log(response);
         }
