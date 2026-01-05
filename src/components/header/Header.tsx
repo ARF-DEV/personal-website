@@ -16,7 +16,6 @@ function Header() {
           {/* TODO: use map[text : on click event] and loop through it, make it a props */}
           <Button text="Home" onClick={() => navigate("/")} />
           <Button text="About" onClick={() => navigate("/about")} />
-          <Button text="Create" onClick={() => navigate("/blogs")} />
         </div>
       </div>
       <Outlet/>

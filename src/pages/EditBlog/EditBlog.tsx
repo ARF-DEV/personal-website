@@ -61,6 +61,7 @@ function EditBlog() {
                 <Button
                     text="Done"
                     onClick={saveBlog}
+                    className={styles.doneButton}
                 />
             </div>
             <div className={styles.footer}></div>

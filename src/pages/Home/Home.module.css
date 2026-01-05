@@ -1,13 +1,9 @@
-.footer {
-    height: 10px;
-}
-
-.buttonContainer {
+.topContainer {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
-.submitButton {
+.createButton {
     height: 35px;
     width: 80px;
     font-weight: bold;
@@ -19,7 +15,7 @@
     border-radius: 2px;
 }
 
-.submitButton:hover {
+.createButton:hover {
     cursor: pointer;
     border: solid;
 }

@@ -1,24 +1,20 @@
 
 .button {
-  all: unset;
   color: inherit;
   text-decoration: none;
   transition: color 0.1s ease;
-  padding: 0;
-  margin: 0;
+  height: 35px;
+  width: 80px;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+  font-size: 16px;
 }
 .button:hover {
-  all: unset;
   color: rgb(150, 150, 150);
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
-}
-
-button:focus {
-  outline: none;
-}
-button:focus-visible {
-  outline: 2px solid blue; /* or keep it styled for keyboard users */
+  border: solid;
 }
 
 .boldText {

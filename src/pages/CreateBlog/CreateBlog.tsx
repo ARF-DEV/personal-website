@@ -54,6 +54,7 @@ export function CreateBlog() {
                 <Button
                     text="Submit"
                     onClick={submitBlog}
+                    className={styles.submitButton}
                 />
             </div>
             <div className="footer"></div>

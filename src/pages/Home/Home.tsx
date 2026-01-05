@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import type { Blog } from "../../types/blog";
 import { formatDate } from "../../utils/date";
-
+import Button from "../../components/button/Button";
+import { useNavigate } from "react-router";
+import styles from "./Home.module.css";
 
 function Home() {
+  const navigate = useNavigate();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -14,17 +17,21 @@ function Home() {
       setBlogs(response.data.data);
     }
     fetchBlogs();
-
   }, []);
   return (
-    <div>
-      <Title title="caffeine_addict's" description="for blog and stuff.." />
-      {
-        blogs.map((blog) => {
-          return <ListItem key={blog.slug} id={blog.slug} title={blog.title} description={formatDate(blog.created_at)} />
-        })
-      }
-    </div>
+    <>
+      <div className={styles.topContainer}>
+        <Title title="caffeine_addict's" description="for blog and stuff.." />
+        <Button text="Create" onClick={() => navigate("/blogs")} className={styles.createButton} />
+      </div>
+      <div>
+        {
+          blogs.map((blog) => {
+            return <ListItem key={blog.slug} id={blog.slug} title={blog.title} description={formatDate(blog.created_at)} />
+          })
+        }
+      </div>
+    </>
   );
 }
 

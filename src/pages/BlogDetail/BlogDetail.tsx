@@ -34,6 +34,7 @@ export function BlogDetail() {
                 <Button
                     text="Edit"
                     onClick={() => {navigate(`/blogs/${param.id}/edit`)}}
+                    className={styles.editButton}
                 />
             </div>
             <div className={styles.footer}></div>
