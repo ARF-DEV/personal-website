@@ -4,13 +4,19 @@ import Input from "../../components/input/Input";
 import axios from "axios";
 import type { BlogData } from "../../types/blog";
 import styles from "./CreateBlog.module.css"
+import Title from "../../components/title/Title";
+import { TextMarkdown } from "../../components/text/Text";
+import { useNavigate } from "react-router";
 
 export function CreateBlog() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [blog, setBlog] = useState<BlogData>({
         content: "",
         title: "",
-    })
+    });
+    const [isEdit, setIsEdit] = useState<boolean>(true);
+    const navigate = useNavigate();
+
     const updateTitle = (newTitle: string) => {
         setBlog(
             {
@@ -27,7 +33,6 @@ export function CreateBlog() {
             }
         )
     }
-
     const submitBlog = () => {
         const postBlogs = async () => {
             if (blog.title === "")  {
@@ -35,9 +40,11 @@ export function CreateBlog() {
                 return
             }
             const response = await axios.post(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`, blog)
+            // TODO: handle error
             console.log(response);
         }
         postBlogs();
+        navigate("/");
     };
 
     useEffect(() => {
@@ -48,8 +55,35 @@ export function CreateBlog() {
 
     return (
         <div ref={containerRef} className="content-container">
-            <Input initialValue={blog.title} updateFunc={updateTitle} placeHolder="Your title"/>
-            <Input initialValue={blog.content} updateFunc={updateContent} variant="multi-line" placeHolder="Write your content here"/>
+            <div className={styles.buttonContainer}>
+                <Button
+                    text={isEdit ? "View" : "Edit"}
+                    onClick={() => {setIsEdit((prev) => {return !prev})}}
+                    className={styles.editButton}
+                />
+            </div>
+            {isEdit ? (
+                <>
+                    <Input 
+                    initialValue={blog.title} 
+                    updateFunc={updateTitle} 
+                    placeHolder="Your title"
+                    />
+                    <Input 
+                    initialValue={blog.content} 
+                    updateFunc={updateContent}
+                    variant="multi-line"
+                    placeHolder="Write your content here"
+                    />
+                </>
+            ) : (
+                <>
+                   <Title title={blog.title}/>
+                    <TextMarkdown>
+                        {blog.content}
+                    </TextMarkdown>
+                </>
+            )}
             <div className={styles.buttonContainer}>
                 <Button
                     text="Submit"

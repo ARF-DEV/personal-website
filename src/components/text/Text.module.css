@@ -1,6 +1,6 @@
 .text {
     flex-grow: 1;
 }
-.text-indent {
+.textIndent {
     text-indent: 1rem;
 }
