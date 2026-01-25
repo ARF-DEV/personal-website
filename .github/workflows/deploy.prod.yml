@@ -23,7 +23,6 @@ jobs:
           echo "REPO=${GITHUB_REPOSITORY@L}" >> "${GITHUB_ENV}"
       - name: Build Image
         run: |
-          build -t personal-website .
           docker build \
             --build-arg VITE_API_BASE_URL=${{secrets.API_HOST}} \
             -t vite-frontend .
