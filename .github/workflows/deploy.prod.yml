@@ -25,7 +25,7 @@ jobs:
         run: |
           docker build \
             --build-arg VITE_API_BASE_URL=${{secrets.API_HOST}} \
-            -t vite-frontend .
+            -t personal-website .
           docker image tag personal-website ghcr.io/${{ env.REPO }}:latest
       - name: Login Docker
         uses: docker/login-action@v3
