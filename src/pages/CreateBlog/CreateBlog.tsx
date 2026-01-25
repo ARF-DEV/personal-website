@@ -40,7 +40,6 @@ export function CreateBlog() {
                 return
             }
             const response = await axios.post(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`, blog)
-            // TODO: handle error
             console.log(response);
         }
         postBlogs();
