@@ -13,23 +13,35 @@ function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   useEffect(() => {
     const fetchBlogs = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_API_HOST}/public/v1/blogs`);
+      console.log(import.meta.env.VITE_API_HOST);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_HOST}/public/v1/blogs`,
+      );
       setBlogs(response.data.data);
-    }
+    };
     fetchBlogs();
   }, []);
   return (
     <>
       <div className={styles.topContainer}>
         <Title title="caffeine_addict's" description="for blog and stuff.." />
-        <Button text="Create" onClick={() => navigate("/blogs")} className={styles.createButton} />
+        <Button
+          text="Create"
+          onClick={() => navigate("/blogs")}
+          className={styles.createButton}
+        />
       </div>
       <div>
-        {
-          blogs.map((blog) => {
-            return <ListItem key={blog.slug} id={blog.slug} title={blog.title} description={formatDate(blog.created_at)} />
-          })
-        }
+        {blogs.map((blog) => {
+          return (
+            <ListItem
+              key={blog.slug}
+              id={blog.slug}
+              title={blog.title}
+              description={formatDate(blog.created_at)}
+            />
+          );
+        })}
       </div>
     </>
   );
