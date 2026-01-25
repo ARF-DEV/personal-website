@@ -24,7 +24,7 @@ jobs:
       - name: Build Image
         run: |
           docker build \
-            --build-arg VITE_API_BASE_URL=${{secrets.API_HOST}} \
+            --build-arg VITE_API_HOST=${{ secrets.API_HOST }} \
             -t personal-website .
           docker image tag personal-website ghcr.io/${{ env.REPO }}:latest
       - name: Login Docker
