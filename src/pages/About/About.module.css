@@ -1,11 +1,4 @@
-.body {
-  width: auto;
-  padding-left: 10vw;
-  padding-right: 10vw;
-  padding-bottom: 100px;
-}
-
-.container {
+.aboutContainer {
   display: flex;
   flex-direction: row;
   gap: 1rem;

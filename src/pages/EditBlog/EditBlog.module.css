@@ -1,0 +1,25 @@
+.footer {
+    height: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.doneButton {
+    height: 35px;
+    width: 80px;
+    font-weight: bold;
+    align-self: center;
+    background-color:inherit;
+    border: none;
+    transition: border 0.05s ease;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+.doneButton:hover {
+    cursor: pointer;
+    border: solid;
+}

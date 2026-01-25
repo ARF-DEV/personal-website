@@ -1,15 +1,20 @@
 import styles from "./Button.module.css";
 
-type ButtonOnClickFunc = () => void;
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  className?: string;
+}
+
 function Button({
   text,
-  onClick = () => {},
-}: {
-  text: string;
-  onClick: ButtonOnClickFunc;
-}) {
+  onClick = () => { },
+  className = `${styles.button} ${styles.boldText}`
+}: ButtonProps) {
+  // const defaultClass = `${styles.button} ${styles.boldText}`;
+  // const combinedClass = defaultClass + " " + className;
   return (
-    <button className={`${styles.button} ${styles.boldText}`} onClick={onClick}>
+    <button className={className} onClick={onClick}>
       {text}
     </button>
   );

@@ -1,0 +1,20 @@
+.input-container {
+    width: 100%;
+    margin-top: 5px;
+    padding-left: 0;
+    margin-bottom: 5px;
+}
+
+.input {
+  font-size: 18px;
+  min-height: 100%;
+}
+
+.one-line {
+  min-height: 20px;
+}
+
+.multi-line {
+  min-height: auto;
+  flex-grow: 1;
+}

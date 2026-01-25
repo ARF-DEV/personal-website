@@ -1,0 +1,21 @@
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.createButton {
+    height: 35px;
+    width: 80px;
+    font-weight: bold;
+    align-self: center;
+    background-color:inherit;
+    border: none;
+    transition: border 0.05s ease;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+.createButton:hover {
+    cursor: pointer;
+    border: solid;
+}
