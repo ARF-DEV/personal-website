@@ -13,7 +13,6 @@ function Home() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   useEffect(() => {
     const fetchBlogs = async () => {
-      console.log(import.meta.env.VITE_API_HOST);
       const response = await axios.get(
         `${import.meta.env.VITE_API_HOST}/public/v1/blogs`,
       );

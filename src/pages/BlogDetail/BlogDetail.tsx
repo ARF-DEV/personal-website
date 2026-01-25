@@ -15,7 +15,6 @@ export function BlogDetail() {
 
   useEffect(() => {
     const fetchBlogDetail = async () => {
-      console.log(import.meta.env.VITE_API_HOST);
       const response = await axios.get(
         `${import.meta.env.VITE_API_HOST}/public/v1/blogs/${param.id}`,
       );
